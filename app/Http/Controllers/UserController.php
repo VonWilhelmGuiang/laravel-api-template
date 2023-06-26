@@ -10,9 +10,9 @@ class UserController extends Controller
 {
     public function get_user(Request $request){
         $users = $request->user_id ? 
-            DB::table('users')->select('id','first_name','last_name','created_at as date_created')->find($request->user_id)
+            DB::table('users')->select('id','first_name','last_name','user_type','created_at as date_created')->where('user_type', '=', 'employee')->find($request->user_id)
         : 
-            DB::table('users')->select('id','first_name','last_name','created_at as date_created')->get();
+            DB::table('users')->select('id','first_name','last_name','user_type','created_at as date_created')->where('user_type', '=', 'employee')->get();
 
         return response()->json(['users'=> $users],200);
 
