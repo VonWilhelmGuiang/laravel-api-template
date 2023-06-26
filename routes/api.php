@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Middleware\Permissions;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,9 +19,15 @@ use App\Http\Controllers\AuthController;
 //     return $request->user();
 // });
 
+// auth
 Route::controller(AuthController::class)->group(function () {
     Route::post('auth/login', 'login');
     Route::post('auth/register', 'register');
-    Route::post('auth/logout', 'logout');
-    Route::post('auth/refresh', 'refresh');
+    Route::post('auth/logout', 'logout')->middleware(Permissions::class);
+    Route::post('auth/refresh', 'refresh')->middleware(Permissions::class);
+});
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('users/employee/all','get_user')->middleware(Permissions::class);
+    Route::get('user/id/{user_id}','get_user')->middleware(Permissions::class);
 });
