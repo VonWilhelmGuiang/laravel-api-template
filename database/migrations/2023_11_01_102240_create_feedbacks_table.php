@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->id('feedback_id');
-            $table->foreignId('shop_owner_id')->references('shop_owner_id')->on('shop_owners')->constrained();
-            $table->foreignId('vehicle_owner_id')->references('vehicle_owner_id')->on('vehicle_owners')->constrained();
             $table->foreignId('transaction_id')->references('transaction_id')->on('transactions')->constrained();
             $table->smallInteger('feeback_rate');
             $table->string('feeback_comment',150);

@@ -17,8 +17,12 @@
                     {
                         "name": "email",
                         "in": "query",
-                        "description": "User Email Address",
-                        "required": true
+                        "description": "User Email Address"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "User Password"
                     }
                 ],
                 "responses": {
@@ -26,12 +30,23 @@
                         "description": "Login successful",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "description": "token",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
                             }
                         }
                     },
                     "401": {
                         "description": "Invalid credentials"
+                    },
+                    "422": {
+                        "description": "Required Fields are Empty"
                     }
                 }
             }

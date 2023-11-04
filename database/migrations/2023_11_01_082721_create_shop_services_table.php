@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('shop_services', function (Blueprint $table) {
             $table->id('service_id');
-            $table->foreignId('shop_owner_id')->references('shop_owner_id')->on('shop_owners')->constrained();
+            $table->foreignId('shop_info_id')->references('shop_info_id')->on('shop_info')->constrained();
             $table->string('service_name');
             $table->float('price',6,2);
             $table->string('category',30);
